@@ -1,6 +1,5 @@
 const { ActivityTypes } = require('botbuilder');
-const { DialogSet, ChoicePrompt, WaterfallDialog, WaterfallStepContext } = require('botbuilder-dialogs');
-const { MainMenuDialog } = require("./dialogs/MainMenu");
+const { DialogSet, ChoicePrompt, WaterfallDialog } = require('botbuilder-dialogs');
 
 const MENU_PROMPT = 'menuPrompt';
 const MENU_DIALOG = 'menuDialog';
@@ -13,7 +12,6 @@ class FoodBot {
         // Configure dialogs
         this.dialogState = this.conversationState.createProperty(DIALOG_STATE_PROPERTY);
         this.dialogs = new DialogSet(this.dialogState);
-        // this.dialogs.add(new MainMenuDialog(MENU_DIALOG));
         this.dialogs.add(new ChoicePrompt(MENU_PROMPT));
 
         // Adds a waterfall dialog that prompts users for the top level menu to the dialog set
