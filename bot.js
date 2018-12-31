@@ -1,8 +1,12 @@
 const { ActivityTypes } = require('botbuilder');
 const { DialogSet, ChoicePrompt, WaterfallDialog } = require('botbuilder-dialogs');
+const { DonateFoodDialog } = require('./dialogs/DonateFoodDialog');
+const { FindFoodDialog } = require('./dialogs/FindFoodDialog');
 
 const MENU_PROMPT = 'menuPrompt';
 const MENU_DIALOG = 'menuDialog';
+const DONATE_FOOD_DIALOG = 'donateFoodDialog';
+const FIND_FOOD_DIALOG = 'findFoodDialog';
 const DIALOG_STATE_PROPERTY = 'dialogState';
 
 class FoodBot {
@@ -13,6 +17,9 @@ class FoodBot {
         this.dialogState = this.conversationState.createProperty(DIALOG_STATE_PROPERTY);
         this.dialogs = new DialogSet(this.dialogState);
         this.dialogs.add(new ChoicePrompt(MENU_PROMPT));
+
+        this.dialogs.add(new DonateFoodDialog(DONATE_FOOD_DIALOG));
+        this.dialogs.add(new FindFoodDialog(FIND_FOOD_DIALOG));
 
         // Adds a waterfall dialog that prompts users for the top level menu to the dialog set
         this.dialogs.add(new WaterfallDialog(MENU_DIALOG, [
@@ -72,11 +79,9 @@ class FoodBot {
     async handleMenuResult(step) {
         switch (step.result.value) {
             case "Donate Food":
-                step.context.sendActivity('Donate Food');
-                break;
-            case "Find Food":
-                step.context.sendActivity('Food Bank Hours');
-                break;
+                return step.beginDialog(DONATE_FOOD_DIALOG);
+            case "Find a Food Bank":
+            return step.beginDialog(FIND_FOOD_DIALOG);
         }
         return step.next();
     }
