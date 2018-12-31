@@ -1,5 +1,5 @@
 const { ComponentDialog, ChoicePrompt, WaterfallDialog } = require('botbuilder-dialogs');
-const { getValidDays, filterFoodBanks, createFoodBankCarousel } = require('../services/schedule-service');
+const { getValidDonationDays, filterFoodBanksByDonation, createFoodBankDonationCarousel } = require('../services/schedule-helpers');
 
 class DonateFoodDialog extends ComponentDialog {
     constructor(dialogId) {
@@ -15,15 +15,15 @@ class DonateFoodDialog extends ComponentDialog {
         this.addDialog(new WaterfallDialog(dialogId, [
             async function (step) {
                 return await step.prompt('choicePrompt', {
-                    choices: getValidDays(),
+                    choices: getValidDonationDays(),
                     prompt: "What day would you like to donate food?",
                     retryPrompt: "That's not a valid day! Please choose a valid day."
                 });
             },
             async function (step) {
                 const day = step.result.value;
-                let filteredFoodBanks = filterFoodBanks(day);
-                let carousel = createFoodBankCarousel(filteredFoodBanks)
+                let filteredFoodBanks = filterFoodBanksByDonation(day);
+                let carousel = createFoodBankDonationCarousel(filteredFoodBanks)
                 return step.context.sendActivity(carousel);
             }
         ]));
