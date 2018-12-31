@@ -80,9 +80,8 @@ class FoodBot {
         switch (step.result.value) {
             case "Donate Food":
                 return step.beginDialog(DONATE_FOOD_DIALOG);
-            case "Find Food":
-                step.context.sendActivity('Food Bank Hours');
-                break;
+            case "Find a Food Bank":
+            return step.beginDialog(FIND_FOOD_DIALOG);
         }
         return step.next();
     }
