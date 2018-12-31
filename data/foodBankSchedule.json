@@ -15,6 +15,20 @@
                 "day": "Wednesday",
                 "hours": "1:00PM to 3:00PM"
             }
+        ], 
+        "pickupHours": [
+            {
+                "day": "Monday",
+                "hours": "2:00PM to 4:00PM"
+            },
+            {
+                "day": "Tuesday",
+                "hours": "2:00PM to 4:00PM"
+            },
+            {
+                "day": "Wednesday",
+                "hours": "2:00PM to 4:00PM"
+            }
         ]
     },
     {
@@ -33,24 +47,34 @@
                 "day": "Saturday",
                 "hours": "9:00AM to 5:00PM"
             }
+        ], 
+        "pickupHours": [
+            {
+                "day": "Thursday",
+                "hours": "10:00AM to 6:00PM"
+            },
+            {
+                "day": "Friday",
+                "hours": "10:00AM to 6:00PM"
+            },
+            {
+                "day": "Saturday",
+                "hours": "10:00AM to 6:00PM"
+            }
         ]
     },
     {
-        "name": "Downtown Food Bank ",
-        "donationNotes": "Please call ahead before donations, as our supply is constantly changing",
+        "name": "Downtown Food Bank",
+        "donationNotes": "Please call ahead before donations, as our supply is constantly changing. We receive donations on Saturdays and deliver them ourselves on Sunday.",
         "donationHours": [
             {
                 "day": "Saturday",
-                "hours": "10:00AM to 5:30PM"
-            },
-            {
-                "day": "Sunday",
                 "hours": "10:00AM to 5:30PM"
             }
         ]
     },
     {
-        "name": "Northwest Harvest",
+        "name": "Fremont Food Bank",
         "donationNotes": "We accept packaged foods and canned goods.",
         "donationHours": [
             {
@@ -64,6 +88,100 @@
             {
                 "day": "Saturday",
                 "hours": "11:00AM to 1:00PM"
+            }
+        ], 
+        "pickupHours": [
+            {
+                "day": "Thursday",
+                "hours": "12:00AM to 2:00PM"
+            },
+            {
+                "day": "Friday",
+                "hours": "12:00AM to 2:00PM"
+            },
+            {
+                "day": "Saturday",
+                "hours": "12:00AM to 2:00PM"
+            }
+        ]
+    },
+    {
+        "name": "Emergency Food Supply",
+        "donationNotes": "We accept any and all food donations",
+        "donationHours": [
+            {
+                "day": "Monday",
+                "hours": "9:00AM to 4:00PM"
+            },
+            {
+                "day": "Tuesday",
+                "hours": "9:00AM to 4:00PM"
+            },
+            {
+                "day": "Wednesday",
+                "hours": "9:00AM to 4:00PM"
+            },
+            {
+                "day": "Thursday",
+                "hours": "9:00AM to 4:00PM"
+            },
+            {
+                "day": "Friday",
+                "hours": "9:00AM to 4:00PM"
+            }
+        ],
+        "pickupHours": [
+            {
+                "day": "Monday",
+                "hours": "10:00AM to 5:00PM"
+            },
+            {
+                "day": "Tuesday",
+                "hours": "10:00AM to 5:00PM"
+            },
+            {
+                "day": "Wednesday",
+                "hours": "10:00AM to 5:00PM"
+            },
+            {
+                "day": "Thursday",
+                "hours": "10:00AM to 5:00PM"
+            },
+            {
+                "day": "Friday",
+                "hours": "10:00AM to 5:00PM"
+            }
+        ]
+    },
+    {
+        "name": "Northwest Food Bank",
+        "donationNotes": "We accept packaged foods and canned goods.",
+        "donationHours": [
+            {
+                "day": "Tuesday",
+                "hours": "11:00AM to 1:00PM"
+            },
+            {
+                "day": "Wednesday",
+                "hours": "11:00AM to 1:00PM"
+            },
+            {
+                "day": "Saturday",
+                "hours": "11:00AM to 1:00PM"
+            }
+        ],
+        "pickupHours": [
+            {
+                "day": "Tuesday",
+                "hours": "12:00AM to 2:00PM"
+            },
+            {
+                "day": "Wednesday",
+                "hours": "12:00AM to 2:00PM"
+            },
+            {
+                "day": "Saturday",
+                "hours": "12:00AM to 2:00PM"
             }
         ]
     }
