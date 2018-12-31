@@ -2,6 +2,7 @@
     {
         "name": "Ballard Food Bank",
         "donationNotes": "We accept packaged foods and canned goods.",
+        "pickupNotes": "We generally serve lunch on weekdays",
         "donationHours": [
             {
                 "day": "Monday",
@@ -15,7 +16,7 @@
                 "day": "Wednesday",
                 "hours": "1:00PM to 3:00PM"
             }
-        ], 
+        ],
         "pickupHours": [
             {
                 "day": "Monday",
@@ -34,6 +35,7 @@
     {
         "name": "Pike Food Bank",
         "donationNotes": "We take any food handled by food service professionals.",
+        "pickupNotes": "Make sure to get here early!",
         "donationHours": [
             {
                 "day": "Thursday",
@@ -47,7 +49,7 @@
                 "day": "Saturday",
                 "hours": "9:00AM to 5:00PM"
             }
-        ], 
+        ],
         "pickupHours": [
             {
                 "day": "Thursday",
@@ -66,16 +68,19 @@
     {
         "name": "Downtown Food Bank",
         "donationNotes": "Please call ahead before donations, as our supply is constantly changing. We receive donations on Saturdays and deliver them ourselves on Sunday.",
+        "pickupNotes": "We don't serve food at our location, but hand it out instead. Look out for our truck downtown!",
         "donationHours": [
             {
                 "day": "Saturday",
                 "hours": "10:00AM to 5:30PM"
             }
-        ]
+        ],
+        "pickupHours": []
     },
     {
         "name": "Fremont Food Bank",
-        "donationNotes": "We accept packaged foods and canned goods.",
+        "donationNotes": "Please bring family friendly food on Saturday as we serve families all day",
+        "pickupNotes": "We have a family dining area open all day on Saturday!",
         "donationHours": [
             {
                 "day": "Thursday",
@@ -87,9 +92,9 @@
             },
             {
                 "day": "Saturday",
-                "hours": "11:00AM to 1:00PM"
+                "hours": "8:00AM to 4:00PM"
             }
-        ], 
+        ],
         "pickupHours": [
             {
                 "day": "Thursday",
@@ -101,13 +106,14 @@
             },
             {
                 "day": "Saturday",
-                "hours": "12:00AM to 2:00PM"
+                "hours": "9:00AM to 5:00PM"
             }
         ]
     },
     {
         "name": "Emergency Food Supply",
         "donationNotes": "We accept any and all food donations",
+        "pickupNotes": "We're open during business hours ever week day",
         "donationHours": [
             {
                 "day": "Monday",
@@ -155,7 +161,8 @@
     },
     {
         "name": "Northwest Food Bank",
-        "donationNotes": "We accept packaged foods and canned goods.",
+        "donationNotes": "Please only bring food in that had not passed its expiration date",
+        "pickupNotes": "Drop by for lunch!",
         "donationHours": [
             {
                 "day": "Tuesday",
