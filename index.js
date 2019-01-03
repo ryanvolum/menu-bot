@@ -74,7 +74,7 @@ const memoryStorage = new MemoryStorage();
 // Create conversation state with in-memory storage provider.
 const conversationState = new ConversationState(memoryStorage);
 
-// Create the main dialog.
+// Initialize the bot. 
 const myBot = new FoodBot(conversationState);
 
 // Listen for incoming requests.
