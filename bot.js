@@ -81,7 +81,7 @@ class FoodBot {
             case "Donate Food":
                 return step.beginDialog(DONATE_FOOD_DIALOG);
             case "Find a Food Bank":
-            return step.beginDialog(FIND_FOOD_DIALOG);
+                return step.beginDialog(FIND_FOOD_DIALOG);
         }
         return step.next();
     }

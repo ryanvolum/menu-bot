@@ -1,5 +1,5 @@
 const schedule = require('../data/foodBankSchedule.json');
-const { Attachment, CardFactory, MessageFactory } = require("botbuilder");
+const { CardFactory, MessageFactory } = require("botbuilder");
 
 // ================== DONATION HELPERS =======================
 const getValidDonationDays = () => {
