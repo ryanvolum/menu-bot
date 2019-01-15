@@ -1,5 +1,5 @@
 const { ComponentDialog, ConfirmPrompt, ChoicePrompt, TextPrompt, WaterfallDialog } = require('botbuilder-dialogs');
-const { getFoodBanks } = require('../services/schedule-helpers');
+const { getFoodBanks, sendFoodBankMessage } = require('../services/schedule-helpers');
 
 class ContactDialog extends ComponentDialog {
     constructor(dialogId) {
@@ -52,6 +52,7 @@ class ContactDialog extends ComponentDialog {
             },
             async function (step) {
                 //Simulates sending of a message (nothing is actually being sent anywhere)
+                sendFoodBankMessage(step.result.foodBankName, step.result.message, step.result.email);
                 return await step.context.sendActivity(`Great! We've sent your message to ${step.values.foodBankName}. Expect your response to be sent to ${step.values.email}`);
             }
         ]));
