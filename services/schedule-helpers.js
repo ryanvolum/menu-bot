@@ -81,6 +81,12 @@ const createFoodBankPickupCarousel = (foodBanks) => {
 const getFoodBanks = () => {
     return schedule.map((foodBank) => foodBank.name);
 }
+
+// Purely for demonstration - this function does nothing
+const sendFoodBankMessage = (foodBankName, message, emailAddress) => {
+
+}
+
 module.exports.filterFoodBanksByDonation = filterFoodBanksByDonation;
 module.exports.filterFoodBanksByPickup = filterFoodBanksByPickup;
 module.exports.getValidDonationDays = getValidDonationDays;
@@ -88,4 +94,5 @@ module.exports.getValidPickupDays = getValidPickupDays;
 module.exports.createFoodBankDonationCarousel = createFoodBankDonationCarousel;
 module.exports.createFoodBankPickupCarousel = createFoodBankPickupCarousel;
 module.exports.getFoodBanks = getFoodBanks;
+module.exports.sendFoodBankMessage = sendFoodBankMessage;
 
