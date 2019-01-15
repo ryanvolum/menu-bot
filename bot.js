@@ -69,8 +69,8 @@ class FoodBot {
     async promptForMenu(step) {
         return step.prompt(MENU_PROMPT, {
             choices: ["Donate Food", "Find a Food Bank", "Contact Food Bank"],
-            prompt: "Do you have food to donate or do you need to find a food bank?",
-            retryPrompt: "I'm sorry, that wasn't a valid response. Are you looking to donate food or find a food bank?"
+            prompt: "Do you have food to donate, do you need food, or are you contacting a food bank?",
+            retryPrompt: "I'm sorry, that wasn't a valid response. Please select one of the options"
         });
     }
 
