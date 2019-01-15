@@ -1,5 +1,7 @@
 # food-bank-bot
-Demonstrate a guided button flow using waterfall dialogs
+Demonstrate a guided button flow using waterfall dialogs. Here's a quick peek at one of this bot's conversation flows: 
+
+![DonateDialog GIF](https://github.com/ryanvolum/menu-bot/blob/master/wiki_assets/DonateDialog.gif)
 
 This bot has been created using [Microsoft Bot Framework][1]. It demonstrates how to create a menu-guided conversation. 
 
