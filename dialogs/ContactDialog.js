@@ -1,4 +1,4 @@
-const { ComponentDialog, ChoicePrompt, WaterfallDialog } = require('botbuilder-dialogs');
+const { ComponentDialog, ConfirmPrompt, ChoicePrompt, TextPrompt, WaterfallDialog } = require('botbuilder-dialogs');
 const { getFoodBanks } = require('../services/schedule-helpers');
 
 class ContactDialog extends ComponentDialog {
@@ -10,6 +10,8 @@ class ContactDialog extends ComponentDialog {
 
         // Define the prompts used in this conversation flow.
         this.addDialog(new ChoicePrompt('choicePrompt'));
+        this.addDialog(new TextPrompt('textPrompt'));
+        this.addDialog(new ConfirmPrompt('confirmPrompt'));
 
         // Define the conversation flow using a waterfall model.
         this.addDialog(new WaterfallDialog(dialogId, [
@@ -23,10 +25,33 @@ class ContactDialog extends ComponentDialog {
                 });
             },
             async function (step) {
-                const day = step.result.value;
-                let filteredFoodBanks = filterFoodBanksByPickup(day);
-                let carousel = createFoodBankPickupCarousel(filteredFoodBanks)
-                return step.context.sendActivity(carousel);
+                // Persist the food bank name for later waterfall steps to be able to access it
+                step.values.foodBankName = step.result.value;
+
+                return await step.prompt('textPrompt', {
+                    prompt: `Please enter an email address where ${step.values.foodBankName} can message you back at:`
+                });
+            },
+            async function (step) {
+                // Persist the email address for later waterfall steps to be able to access it
+                step.values.email = step.result;
+
+                return await step.prompt('textPrompt',
+                    `Please enter the message you'd like to send to ${step.values.foodBankName}:`,
+                );
+            },
+            async function (step) {
+                // Persist the message for later waterfall steps to be able to access it
+                step.values.message = step.result;
+
+                return await step.prompt('confirmPrompt', {
+                    prompt: `Are you sure you'd like to send:\r
+                    "${step.values.message}"\r
+                    to ${step.values.foodBankName}?`,
+                })
+            },
+            async function (step) {
+                return await step.context.sendActivity(`Great! We've sent your message to ${step.values.foodBankName}. Expect your response to be sent to ${step.values.email}`);
             }
         ]));
     }
