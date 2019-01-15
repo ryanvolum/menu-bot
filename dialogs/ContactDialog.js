@@ -1,7 +1,7 @@
 const { ComponentDialog, ChoicePrompt, WaterfallDialog } = require('botbuilder-dialogs');
-const { getValidPickupDays, filterFoodBanksByPickup, createFoodBankPickupCarousel } = require('../services/schedule-helpers');
+const { getFoodBanks } = require('../services/schedule-helpers');
 
-class FindFoodDialog extends ComponentDialog {
+class ContactDialog extends ComponentDialog {
     constructor(dialogId) {
         super(dialogId);
 
@@ -14,12 +14,12 @@ class FindFoodDialog extends ComponentDialog {
         // Define the conversation flow using a waterfall model.
         this.addDialog(new WaterfallDialog(dialogId, [
             async function (step) {
-                const validPickupDays = getValidPickupDays();
+                const foodBanks = getFoodBanks();
 
                 return await step.prompt('choicePrompt', {
-                    choices: validPickupDays,
-                    prompt: "What day would you like to pickup food?",
-                    retryPrompt: "That's not a valid day! Please choose a valid day."
+                    choices: foodBanks,
+                    prompt: "Which food bank would you like to contact?",
+                    retryPrompt: "That's not a valid food bank! Please choose a valid food bank."
                 });
             },
             async function (step) {
@@ -32,4 +32,4 @@ class FindFoodDialog extends ComponentDialog {
     }
 }
 
-exports.FindFoodDialog = FindFoodDialog;
+exports.ContactDialog = ContactDialog;
