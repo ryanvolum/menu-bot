@@ -52,8 +52,12 @@ class ContactDialog extends ComponentDialog {
             },
             async function (step) {
                 //Simulates sending of a message (nothing is actually being sent anywhere)
-                sendFoodBankMessage(step.result.foodBankName, step.result.message, step.result.email);
-                return await step.context.sendActivity(`Great! We've sent your message to ${step.values.foodBankName}. Expect your response to be sent to ${step.values.email}`);
+                if (step.result) {
+                    sendFoodBankMessage(step.result.foodBankName, step.result.message, step.result.email);
+                    return await step.context.sendActivity(`Great! We've sent your message to ${step.values.foodBankName}. Expect your response to be sent to ${step.values.email}`);
+                } else {
+                    return await step.context.sendActivity(`No worries! I won't send your message`);
+                }
             }
         ]));
     }
