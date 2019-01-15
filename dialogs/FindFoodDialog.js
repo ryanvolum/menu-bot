@@ -14,8 +14,10 @@ class FindFoodDialog extends ComponentDialog {
         // Define the conversation flow using a waterfall model.
         this.addDialog(new WaterfallDialog(dialogId, [
             async function (step) {
+                const validPickupDays = getValidPickupDays();
+
                 return await step.prompt('choicePrompt', {
-                    choices: getValidPickupDays(),
+                    choices: validPickupDays,
                     prompt: "What day would you like to pickup food?",
                     retryPrompt: "That's not a valid day! Please choose a valid day."
                 });

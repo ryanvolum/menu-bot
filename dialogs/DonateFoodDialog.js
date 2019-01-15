@@ -13,8 +13,10 @@ class DonateFoodDialog extends ComponentDialog {
         // Define the conversation flow using a waterfall model.
         this.addDialog(new WaterfallDialog(dialogId, [
             async function (step) {
+                const validDonationDays = getValidDonationDays();
+
                 return await step.prompt('choicePrompt', {
-                    choices: getValidDonationDays(),
+                    choices: validDonationDays,
                     prompt: "What day would you like to donate food?",
                     retryPrompt: "That's not a valid day! Please choose a valid day."
                 });
