@@ -49,7 +49,8 @@ namespace food_bot.Dialogs
                             return await stepContext.PromptAsync("textPrompt", new PromptOptions
                                 {
                                     Prompt = MessageFactory.Text($"Please enter an email address where {stepContext.Values[FOODBANKNAME]} can message you back at:")
-                                }
+                                },
+                                ct
                             );
                         },
                         async (stepContext, ct) =>
@@ -60,7 +61,8 @@ namespace food_bot.Dialogs
                             return await stepContext.PromptAsync("textPrompt", new PromptOptions
                                 {
                                     Prompt = MessageFactory.Text($"Please enter the message you'd like to send to {stepContext.Values[FOODBANKNAME]}:")
-                                }
+                                },
+                                ct
                             );
                         },
                         async (stepContext, ct) =>
@@ -71,7 +73,8 @@ namespace food_bot.Dialogs
                             return await stepContext.PromptAsync("confirmPrompt", new PromptOptions
                                 {
                                     Prompt = MessageFactory.Text($"Are you sure you'd like to send:\r \"{stepContext.Values[MESSAGE]}\"\r to {stepContext.Values[FOODBANKNAME]}?")
-                                }
+                                },
+                                ct
                             );
                         },
                         async (stepContext, ct) =>
@@ -80,11 +83,11 @@ namespace food_bot.Dialogs
                             if ((bool)stepContext.Result)
                             {
                                 ScheduleHelpers.SendFoodbankMessage((string)stepContext.Values[FOODBANKNAME], (string)stepContext.Values[EMAILADDRESS], (string)stepContext.Values[MESSAGE]);
-                                await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Great! We've sent your message to {stepContext.Values[FOODBANKNAME]}. Expect your response to be sent to {stepContext.Values[EMAILADDRESS]}"));
+                                await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Great! We've sent your message to {stepContext.Values[FOODBANKNAME]}. Expect your response to be sent to {stepContext.Values[EMAILADDRESS]}"), ct);
                             }
                             else
                             {
-                                await stepContext.Context.SendActivityAsync(MessageFactory.Text($"No worries! I won't send your message"));
+                                await stepContext.Context.SendActivityAsync(MessageFactory.Text($"No worries! I won't send your message"), ct);
                             }
 
                             return await stepContext.EndDialogAsync();
