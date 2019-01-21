@@ -44,10 +44,22 @@ namespace food_bot.Services
             return days;
         }
 
-        public static List<FoodBank> FilterFoodBanksByDonation(string day)
+        public static IList<string> GetValidPickupDays()
         {
-            return ScheduleData.Where(foodBank => 
-                foodBank.DonationHours.FirstOrDefault(dh => dh.Day == day) != null).ToList();
+            var days = new List<string>();
+
+            foreach (var foodBank in ScheduleData)
+            {
+                foreach (var pickupHour in foodBank.PickupHours)
+                {
+                    if (!days.Contains(pickupHour.Day))
+                    {
+                        days.Add(pickupHour.Day);
+                    }
+                }
+            }
+
+            return days;
         }
 
         public static IMessageActivity CreateFoodBankDonationCarousel(List<FoodBank> foodbanks)
@@ -56,11 +68,48 @@ namespace food_bot.Services
             return MessageFactory.Carousel(attachments);
         }
 
-        public static Attachment CreateFoodbankDonationCardAttachment(FoodBank foodBank)
+        public static IMessageActivity CreateFoodBankPickupCarousel(List<FoodBank> foodBanks)
+        {
+            var attachments = foodBanks.Select(fb => CreateFoodbankPickupCardAttachment(fb));
+            return MessageFactory.Carousel(attachments);
+        }
+
+
+        public static List<FoodBank> FilterFoodBanksByDonation(string day)
+        {
+            return ScheduleData.Where(foodBank =>
+                foodBank.DonationHours.FirstOrDefault(dh => dh.Day == day) != null).ToList();
+        }
+
+        public static List<FoodBank> FilterFoodBanksByPickup(string day)
+        {
+            return ScheduleData.Where(foodBank =>
+                foodBank.PickupHours.FirstOrDefault(dh => dh.Day == day) != null).ToList();
+        }
+
+        public static List<string> GetFoodBanks()
+        {
+            return ScheduleData.Select((s) => s.Name).ToList();
+        }
+
+        public static void SendFoodbankMessage(string v1, string v2, string v3)
+        {
+            // Simulated...
+        }
+
+        private static Attachment CreateFoodbankDonationCardAttachment(FoodBank foodBank)
         {
             var allHours = foodBank.DonationHours.Select(dh => $"\r{dh.Day} {dh.Hours}")
                     .Aggregate((string prev, string curr) => prev + ", " + curr);
             var cardText = $"**{foodBank.Name}**\r{foodBank.DonationNotes}\r**Hours** {allHours}";
+            return new HeroCard(cardText).ToAttachment();
+        }
+
+        private static Attachment CreateFoodbankPickupCardAttachment(FoodBank foodBank)
+        {
+            var allHours = foodBank.PickupHours.Select(dh => $"\r{dh.Day} {dh.Hours}")
+                    .Aggregate((string prev, string curr) => prev + ", " + curr);
+            var cardText = $"**{foodBank.Name}**\r{foodBank.PickupNotes}\r**Hours** {allHours}";
             return new HeroCard(cardText).ToAttachment();
         }
     }

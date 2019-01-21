@@ -26,6 +26,8 @@ namespace food_bot
         const string MENU_PROMPT = "menuPrompt";
         const string MENU_DIALOG = "menuDialog";
         const string DONATE_FOOD_DIALOG = "donateFoodDialog";
+        const string FIND_FOOD_DIALOG = "findFoodDialog";
+        const string CONTACT_DIALOG = "contactDialog";
 
         private readonly food_botAccessors _accessors;
         private readonly ILogger _logger;
@@ -51,8 +53,8 @@ namespace food_bot
             this._dialogs = new DialogSet(accessors.ConversationDialogStateAccessor);
             this._dialogs.Add(new ChoicePrompt(MENU_PROMPT));
             this._dialogs.Add(new DonateFoodDialog(DONATE_FOOD_DIALOG));
-            //this._dialogs.Add(new FindFoodDialog(FIND_FOOD_DIALOG));
-            //this._dialogs.Add(new ContactDialog(CONTACT_DIALOG));
+            this._dialogs.Add(new FindFoodDialog(FIND_FOOD_DIALOG));
+            this._dialogs.Add(new ContactDialog(CONTACT_DIALOG));
 
             // Adds a waterfall dialog that prompts users for the top level menu to the dialog set
             // Define the steps of the waterfall dialog and add it to the set.
@@ -149,10 +151,10 @@ namespace food_bot
             {
                 case "Donate Food":
                     return await stepContext.BeginDialogAsync(DONATE_FOOD_DIALOG, null, cancellationToken);
-                //case "Find a Food Bank":
-                //    return await stepContext.BeginDialogAsync(FIND_FOOD_DIALOG, null, cancellationToken);
-                //case "Contact Food Bank":
-                //    return await stepContext.BeginDialogAsync(CONTACT_DIALOG, null, cancellationToken);
+                case "Find a Food Bank":
+                    return await stepContext.BeginDialogAsync(FIND_FOOD_DIALOG, null, cancellationToken);
+                case "Contact Food Bank":
+                    return await stepContext.BeginDialogAsync(CONTACT_DIALOG, null, cancellationToken);
                 default:
                     break;
             }
