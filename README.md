@@ -17,11 +17,17 @@ node --version
 # To run the bot
 - Install modules and start the bot.
 ```bash
-npm i && npm start
+npm i
+```
+```bash
+npm start
 ```
 Alternatively you can also run the watch script which will reload the bot when source code changes are detected.
 ```bash
-npm i && npm run watch
+npm i 
+```
+```bash
+npm run watch
 ```
 
 # Testing the bot using Bot Framework Emulator **v4**
