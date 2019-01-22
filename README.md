@@ -15,7 +15,7 @@ node --version
 ```
 
 # To run the bot
-- Install modules and start the bot.
+Install modules and start the bot.
 ```bash
 npm i
 ```
