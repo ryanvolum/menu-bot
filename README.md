@@ -1,5 +1,5 @@
 # food-bank-bot
-Demonstrate a guided button flow using waterfall dialogs. Here's a quick peek at one of this bot's conversation flows: 
+This repo contains a C# and Node version of a bot that demonstrates a guided button flow using waterfall dialogs. Here's a quick peek at one of this bot's conversation flows: 
 
 ![DonateDialog GIF](https://github.com/ryanvolum/menu-bot/blob/master/wiki_assets/DonateDialog.gif)
 
