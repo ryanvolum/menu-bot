@@ -1,4 +1,4 @@
-﻿# food_bot
+﻿# FoodBot
 
 This bot has been created using [Microsoft Bot Framework][1]. It demonstrates how to create a menu-guided conversation. 
 
@@ -12,7 +12,7 @@ See [wiki][6] for a code and pattern breakdown.
 # Running Locally
 
 ## Visual Studio
-- Open food_bot.csproj in Visual Studio.
+- Open FoodBot.csproj in Visual Studio.
 - Run the project (press `F5` key).
 
 ## Testing the bot using Bot Framework Emulator **V4**
@@ -22,7 +22,7 @@ developers to test and debug their bots on localhost or running remotely through
 
 ## Connect to bot using Bot Framework Emulator **V4**
 - Launch the Bot Framework Emulator.
-- File -> Open bot and open [food_bot.bot](food_bot.bot).
+- File -> Open bot and open [FoodBot.bot](FoodBot.bot).
 
 [1]: https://dev.botframework.com
 [2]: https://docs.microsoft.com/en-us/visualstudio/releasenotes/vs2017-relnotes
