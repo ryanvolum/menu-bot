@@ -29,4 +29,4 @@ developers to test and debug their bots on localhost or running remotely through
 [3]: https://dotnet.microsoft.com/download/dotnet-core/2.1
 [4]: https://github.com/microsoft/botframework-emulator
 [5]: https://github.com/Microsoft/BotFramework-Emulator/releases
-[6]: https://github.com/ryanvolum/menu-bot/wiki
+[6]: https://github.com/ryanvolum/menu-bot/wiki/C%23-Menu-Bot-Wiki
