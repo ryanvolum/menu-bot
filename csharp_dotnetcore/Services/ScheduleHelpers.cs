@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using food_bot.Model;
-using Microsoft.Bot.Builder;
-using Microsoft.Bot.Schema;
+using FoodBot.Models;
 using Newtonsoft.Json;
 
-namespace food_bot.Services
+namespace FoodBot.Services
 {
     public class ScheduleHelpers
     {
@@ -62,19 +58,6 @@ namespace food_bot.Services
             return days;
         }
 
-        public static IMessageActivity CreateFoodBankDonationCarousel(List<FoodBank> foodbanks)
-        {
-            var attachments = foodbanks.Select(fb => CreateFoodbankDonationCardAttachment(fb));
-            return MessageFactory.Carousel(attachments);
-        }
-
-        public static IMessageActivity CreateFoodBankPickupCarousel(List<FoodBank> foodBanks)
-        {
-            var attachments = foodBanks.Select(fb => CreateFoodbankPickupCardAttachment(fb));
-            return MessageFactory.Carousel(attachments);
-        }
-
-
         public static List<FoodBank> FilterFoodBanksByDonation(string day)
         {
             return ScheduleData.Where(foodBank =>
@@ -95,22 +78,6 @@ namespace food_bot.Services
         public static void SendFoodbankMessage(string v1, string v2, string v3)
         {
             // Simulated...
-        }
-
-        private static Attachment CreateFoodbankDonationCardAttachment(FoodBank foodBank)
-        {
-            var allHours = foodBank.DonationHours.Select(dh => $"\r{dh.Day} {dh.Hours}")
-                    .Aggregate((string prev, string curr) => prev + ", " + curr);
-            var cardText = $"**{foodBank.Name}**\r{foodBank.DonationNotes}\r**Hours** {allHours}";
-            return new HeroCard(cardText).ToAttachment();
-        }
-
-        private static Attachment CreateFoodbankPickupCardAttachment(FoodBank foodBank)
-        {
-            var allHours = foodBank.PickupHours.Select(dh => $"\r{dh.Day} {dh.Hours}")
-                    .Aggregate((string prev, string curr) => prev + ", " + curr);
-            var cardText = $"**{foodBank.Name}**\r{foodBank.PickupNotes}\r**Hours** {allHours}";
-            return new HeroCard(cardText).ToAttachment();
         }
     }
 }

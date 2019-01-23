@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace food_bot.Model
+namespace FoodBot.Models
 {
 
     public class FoodBankSchedule

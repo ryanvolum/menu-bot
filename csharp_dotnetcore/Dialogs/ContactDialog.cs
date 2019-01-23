@@ -1,4 +1,4 @@
-﻿using food_bot.Services;
+﻿using FoodBot.Services;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Choices;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace food_bot.Dialogs
+namespace FoodBot.Dialogs
 {
     public class ContactDialog : ComponentDialog
     {
@@ -39,7 +39,7 @@ namespace food_bot.Dialogs
                                     RetryPrompt= MessageFactory.Text("That's not a valid food bank! Please choose a valid food bank.")
                                 },
                                 ct
-                            );
+                            ).ConfigureAwait(false);;
                         },
                         async (stepContext, ct) =>
                         {
@@ -51,7 +51,7 @@ namespace food_bot.Dialogs
                                     Prompt = MessageFactory.Text($"Please enter an email address where {stepContext.Values[FOODBANKNAME]} can message you back at:")
                                 },
                                 ct
-                            );
+                            ).ConfigureAwait(false);;
                         },
                         async (stepContext, ct) =>
                         {
@@ -63,7 +63,7 @@ namespace food_bot.Dialogs
                                     Prompt = MessageFactory.Text($"Please enter the message you'd like to send to {stepContext.Values[FOODBANKNAME]}:")
                                 },
                                 ct
-                            );
+                            ).ConfigureAwait(false);;
                         },
                         async (stepContext, ct) =>
                         {
@@ -75,7 +75,7 @@ namespace food_bot.Dialogs
                                     Prompt = MessageFactory.Text($"Are you sure you'd like to send:\r \"{stepContext.Values[MESSAGE]}\"\r to {stepContext.Values[FOODBANKNAME]}?")
                                 },
                                 ct
-                            );
+                            ).ConfigureAwait(false);
                         },
                         async (stepContext, ct) =>
                         {
@@ -83,14 +83,14 @@ namespace food_bot.Dialogs
                             if ((bool)stepContext.Result)
                             {
                                 ScheduleHelpers.SendFoodbankMessage((string)stepContext.Values[FOODBANKNAME], (string)stepContext.Values[EMAILADDRESS], (string)stepContext.Values[MESSAGE]);
-                                await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Great! We've sent your message to {stepContext.Values[FOODBANKNAME]}. Expect your response to be sent to {stepContext.Values[EMAILADDRESS]}"), ct);
+                                await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Great! We've sent your message to {stepContext.Values[FOODBANKNAME]}. Expect your response to be sent to {stepContext.Values[EMAILADDRESS]}"), ct).ConfigureAwait(false);;
                             }
                             else
                             {
-                                await stepContext.Context.SendActivityAsync(MessageFactory.Text($"No worries! I won't send your message"), ct);
+                                await stepContext.Context.SendActivityAsync(MessageFactory.Text($"No worries! I won't send your message"), ct).ConfigureAwait(false);
                             }
 
-                            return await stepContext.EndDialogAsync();
+                            return await stepContext.EndDialogAsync().ConfigureAwait(false);;
                         }
                     }
                 )

@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using FoodBot.Dialogs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
@@ -16,7 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace food_bot
+namespace FoodBot
 {
     /// <summary>
     /// The Startup class configures services and the request pipeline.
@@ -52,7 +53,7 @@ namespace food_bot
         /// <param name="services">The <see cref="IServiceCollection"/> specifies the contract for a collection of service descriptors.</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddBot<Food_botBot>(options =>
+            services.AddBot<FoodBot>(options =>
             {
                 var secretKey = Configuration.GetSection("botFileSecret")?.Value;
                 var botFilePath = Configuration.GetSection("botFilePath")?.Value;
@@ -72,7 +73,7 @@ namespace food_bot
                 options.CredentialProvider = new SimpleCredentialProvider(endpointService.AppId, endpointService.AppPassword);
 
                 // Creates a logger for the application to use.
-                ILogger logger = _loggerFactory.CreateLogger<Food_botBot>();
+                ILogger logger = _loggerFactory.CreateLogger<FoodBot>();
 
                 // Catches any errors that occur during a conversation turn and logs them.
                 options.OnTurnError = async (context, exception) =>
@@ -108,25 +109,13 @@ namespace food_bot
             // The Conversation State object is where we persist anything at the conversation-scope.
             var conversationState = new ConversationState(dataStore);
 
-            // Create and register state accessors.
-            // Accessors created here are passed into the IBot-derived class on every turn.
-            services.AddSingleton<food_botAccessors>(sp =>
-            {
-                var options = sp.GetRequiredService<IOptions<BotFrameworkOptions>>().Value;
-                if (options == null)
-                {
-                    throw new InvalidOperationException("BotFrameworkOptions must be configured prior to setting up the state accessors");
-                }
-
-                // The dialogs will need a state store accessor. Creating it here once (on-demand) allows the dependency injection
-                // to hand it to our IBot class that is create per-request.
-                var accessors = new food_botAccessors(conversationState)
-                {
-                    ConversationDialogStateAccessor = conversationState.CreateProperty<DialogState>(food_botAccessors.DialogStateName),
-                };
-
-                return accessors;
-            });
+            // Register conversation state.
+            services.AddSingleton<BotState>(conversationState);
+            // The dialogs will need a state store accessor. Creating it here once (on-demand) in the ConversationState allows the dependency injection
+            // to hand it to our top-level DialogSet class, FoodBotDialogSet, that is create per-request.
+            services.AddSingleton<IStatePropertyAccessor<DialogState>>(conversationState.CreateProperty<DialogState>("FOODBOTDIALOGSTATE"));
+            // Register the top-level menu dialog set
+            services.AddSingleton<FoodBotDialogSet>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

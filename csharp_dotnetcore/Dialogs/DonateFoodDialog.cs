@@ -1,4 +1,4 @@
-﻿using food_bot.Services;
+﻿using FoodBot.Services;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Choices;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace food_bot.Dialogs
+namespace FoodBot.Dialogs
 {
     public class DonateFoodDialog : ComponentDialog
     {
@@ -35,18 +35,18 @@ namespace food_bot.Dialogs
                                     RetryPrompt= MessageFactory.Text("That's not a valid day! Please choose a valid day.")
                                 },
                                 ct
-                            );
+                            ).ConfigureAwait(false);;
                         },
                         async (stepContext, ct) =>
                         {
                             var day = ((FoundChoice)stepContext.Result).Value;
                             var filteredFoodBanks = ScheduleHelpers.FilterFoodBanksByDonation(day);
-                            var carousel = ScheduleHelpers.CreateFoodBankDonationCarousel(filteredFoodBanks).AsMessageActivity();
+                            var carousel = UXHelpers.CreateFoodBankDonationCarousel(filteredFoodBanks).AsMessageActivity();
 
                             // Create the activity and attach a set of Hero cards.
-                            await stepContext.Context.SendActivityAsync(carousel);
+                            await stepContext.Context.SendActivityAsync(carousel).ConfigureAwait(false);;
 
-                            return await stepContext.EndDialogAsync();
+                            return await stepContext.EndDialogAsync().ConfigureAwait(false);;
 
                         }
                     }
