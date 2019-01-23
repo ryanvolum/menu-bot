@@ -111,11 +111,11 @@ namespace FoodBot
 
             // Register conversation state.
             services.AddSingleton<BotState>(conversationState);
-            // The dialogs will need a state store accessor. Creating it here once (on-demand) in the ConversationState allows the dependency injection
-            // to hand it to our top-level DialogSet class, FoodBotDialogSet, that is create per-request.
-            services.AddSingleton<IStatePropertyAccessor<DialogState>>(conversationState.CreateProperty<DialogState>("FOODBOTDIALOGSTATE"));
-            // Register the top-level menu dialog set
-            services.AddSingleton<FoodBotDialogSet>();
+
+            // The dialogset will need a state store accessor. Since the state accessor is only going to be used by the FoodBotDialogSet, use  
+            // AddSingleton to register and inline create the FoodBotDialogSet, at the same time creating the the property accessor in the
+            // conversation state
+            services.AddSingleton(sp => new FoodBotDialogSet(conversationState.CreateProperty<DialogState>("FOODBOTDIALOGSTATE")));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

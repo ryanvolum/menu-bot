@@ -72,7 +72,7 @@ namespace FoodBot
                     }
                     else
                     {
-                        await dialogContext.BeginDialogAsync(FoodBotDialogSet.MenuDialogId, null, cancellationToken);
+                        await dialogContext.BeginDialogAsync(FoodBotDialogSet.StartDialogId, null, cancellationToken);
                     }
                 }
                 else if (turnContext.Activity.Type == ActivityTypes.ConversationUpdate)
@@ -83,7 +83,7 @@ namespace FoodBot
 
                         await turnContext.SendActivityAsync("Hey there! Welcome to the food bank bot. I'm here to help orchestrate the delivery of excess food to local food banks!");
 
-                        await dialogContext.BeginDialogAsync(FoodBotDialogSet.MenuDialogId, null, cancellationToken);
+                        await dialogContext.BeginDialogAsync(FoodBotDialogSet.StartDialogId, null, cancellationToken);
                     }
                 }
 
