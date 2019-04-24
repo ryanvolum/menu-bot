@@ -16,7 +16,7 @@ namespace FoodBot.Services
             {
                 if (_scheduleData is null)
                 {
-                    _scheduleData = JsonConvert.DeserializeObject<List<FoodBank>>(File.ReadAllText(@".\Data\foodBankSchedule.json"));
+                    _scheduleData = JsonConvert.DeserializeObject<List<FoodBank>>(File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Data", "foodBankSchedule.json")));
                 }
                 return _scheduleData;
             }
