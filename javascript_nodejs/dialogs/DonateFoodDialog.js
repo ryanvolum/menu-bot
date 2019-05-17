@@ -1,17 +1,29 @@
 const { ComponentDialog, ChoicePrompt, WaterfallDialog } = require('botbuilder-dialogs');
 const { getValidDonationDays, filterFoodBanksByDonation, createFoodBankDonationCarousel } = require('../services/schedule-helpers');
 
+const DONATION_DIALOG = 'donationDialog';
+
 class DonateFoodDialog extends ComponentDialog {
     constructor(dialogId) {
         super(dialogId);
 
-        // ID of the child dialog that should be started anytime the component is started.
-        this.initialDialogId = dialogId;
+        /**  
+         * THIS IS REQUIRED to tell the framework which dialog
+         * will be use as the starting one.  
+         * 
+         * Value doesn't matter, you could use the passed-in dialogId 
+         * or something new
+         * 
+         * Without this, the first Diaglog added will be used, which in 
+         * this example will be the Choice Prompt
+         * **/
+        this.initialDialogId = DONATION_DIALOG; // or dialogId
 
         this.addDialog(new ChoicePrompt('choicePrompt'));
 
         // Define the conversation flow using a waterfall model.
-        this.addDialog(new WaterfallDialog(dialogId, [
+        // The id used here need to match the value given to `initialId`
+        this.addDialog(new WaterfallDialog(DONATION_DIALOG, [
             async function (step) {
                 const validDonationDays = getValidDonationDays();
 
